@@ -4,9 +4,11 @@
 <p>Phone number: <%= @restaurant.phone_number %></p>
 <p>Category: <%= @restaurant.category.capitalize %></p>
 
-<ul>
+<ul class="list-group my-4">
   <% @restaurant.reviews.each do |review| %>
-    <li><%= review.content %></li>
+    <li class="list-group-item">
+      <%= review.content %>
+    </li>
   <% end %>
 </ul>
 
