@@ -1,7 +1,7 @@
 <ul class="list-group my-4">
   <% @restaurants.each do |restaurant| %>
     <li class="list-group-item">
-      <%= link_to restaurant.name, restaurant_path(restaurant) %>
+      <%= link_to "#{restaurant.name} (#{restaurant.rating}/5.0)", restaurant_path(restaurant) %>
     </li>
   <% end %>
 </ul>
