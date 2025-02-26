@@ -1,6 +1,10 @@
 class RestaurantsController < ApplicationController
+  before_action :set_restaurant, only: %i[show]
   def index
     @restaurants = Restaurant.all
+  end
+
+  def show
   end
 
   def new
@@ -9,10 +13,10 @@ class RestaurantsController < ApplicationController
 
   def create
     @restaurant = Restaurant.create(restaurant_params)
-    if @restaurant
-      redirect_to restaurants_path
+    if @restaurant.valid?
+      redirect_to restaurant_path(@restaurant)
     else
-      redirect_to restaurants_path(@restaurant), status: :unprocessable_entity
+      render new_restaurant_path, status: :unprocessable_entity
     end
   end
 
@@ -20,5 +24,9 @@ class RestaurantsController < ApplicationController
 
   def restaurant_params
     params.require(:restaurant).permit(:name, :address, :phone_number, :category)
+  end
+
+  def set_restaurant
+    @restaurant = Restaurant.find(params[:id])
   end
 end
